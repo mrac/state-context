@@ -1,0 +1,33 @@
+{
+  "name": "state-context",
+  "version": "0.1.0",
+  "description": "Simple state-management with React Context API",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrac/state-context.git"
+  },
+  "keywords": [
+    "state",
+    "management",
+    "react",
+    "context",
+    "hooks"
+  ],
+  "author": "Michal Raczkowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrac/state-context/issues"
+  },
+  "homepage": "https://github.com/mrac/state-context#readme",
+  "dependencies": {
+    "react": ">=16.8.0"
+  }
+}
