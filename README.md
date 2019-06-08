@@ -10,7 +10,7 @@ npm install state-context
 
 ## Idea
 
-1. In best case you just need to change 3 lines of code in your component to switch from local to global state:
+1. In best case you just need to change 1 line of code in your component to switch from local to global state:
 
 Before:
 
@@ -25,8 +25,7 @@ After:
 
   ...
 
-  const context = React.useContext(MyStateContext);
-  const [name, setName] = context.useState.name;
+  const [name, setName] = React.useContext(MyStateContext).useState.name;
 ```
 
 2. It's useful for cases where Redux boilerplate would be an overhead (it has no actions, action-creators, reducers, mappings etc.)
