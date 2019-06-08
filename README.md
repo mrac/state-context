@@ -26,6 +26,6 @@ After:
 ```
 
 2. It's useful for cases where Redux boilerplate would be an overhead (it has no actions, action-creators, reducers, mappings etc.)
-3. You can set up one global state or multiple shared states.
+3. You can set up one global store or multiple shared stores.
 4. It's still deterministic as you can attach middleware and watch/undo/redo.
 5. You have TypeScript support out of the box.
