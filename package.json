@@ -1,6 +1,6 @@
 {
   "name": "state-context",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple state-management with React Context API",
   "main": "src/index.tsx",
   "scripts": {
