@@ -29,5 +29,8 @@
   "homepage": "https://github.com/mrac/state-context#readme",
   "dependencies": {
     "react": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.19"
   }
 }
