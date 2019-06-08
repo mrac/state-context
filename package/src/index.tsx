@@ -1,5 +1,13 @@
 import * as React from 'react';
 
+import {
+    createContext,
+    useContext,
+    useState,
+    Context,
+    SFC
+} from "react";
+
 interface Store<TState = Partial<{}>> {
     state: TState;
     setState: (newState: Partial<TState>) => void;
@@ -9,7 +17,7 @@ interface Store<TState = Partial<{}>> {
 }
 
 interface StateProviderProps {
-    context: React.Context<Store<any>>;
+    context: Context<Store<any>>;
 }
 
 export interface StateContextMiddleware<TState = Partial<{}>> {
@@ -22,20 +30,20 @@ type StateContextMiddlewareMethod = keyof StateContextMiddleware<Partial<{}>>;
 
 type StateContextMiddlewares = StateContextMiddleware<Partial<{}>>[];
 
-const middlewareMap = new Map<React.Context<Store<any>>, StateContextMiddlewares>();
-const oldStateMap = new Map<React.Context<Store<any>>, Partial<{}>>();
-const stateChangeMap = new Map<React.Context<Store<any>>, Partial<{}>>();
+const middlewareMap = new Map<Context<Store<any>>, StateContextMiddlewares>();
+const oldStateMap = new Map<Context<Store<any>>, Partial<{}>>();
+const stateChangeMap = new Map<Context<Store<any>>, Partial<{}>>();
 
 export function createStateContext<TState extends Partial<{}>>(initialState: TState, middlewares?: StateContextMiddlewares) {
-    const contextObject = React.createContext<Store<TState>>({ state: initialState } as Store<TState>);
+    const contextObject = createContext<Store<TState>>({ state: initialState } as Store<TState>);
     middlewares && middlewareMap.set(contextObject, middlewares);
     return contextObject;
 };
 
-export const StateContextProvider: React.SFC<StateProviderProps> = props => {
+export const StateContextProvider: SFC<StateProviderProps> = props => {
     const context = props.context;
-    const stateInitial = React.useContext(context).state;
-    const [state, setState] = React.useState(stateInitial);
+    const stateInitial = useContext(context).state;
+    const [state, setState] = useState(stateInitial);
     const middlewares = middlewareMap.has(context) ? middlewareMap.get(context) : [];
 
     const runMiddlewares = (method: StateContextMiddlewareMethod, log: any) => {
@@ -64,7 +72,7 @@ export const StateContextProvider: React.SFC<StateProviderProps> = props => {
         runMiddlewares('afterSetState', log);
     };
 
-    const useState: any = {};
+    const useStateFn: any = {};
 
     Object.keys(state).forEach(stateKey => {
         let stateValue = state[stateKey];
@@ -75,13 +83,13 @@ export const StateContextProvider: React.SFC<StateProviderProps> = props => {
             });
         };
 
-        useState[stateKey] = [stateValue, setStateFn];
+        useStateFn[stateKey] = [stateValue, setStateFn];
     });
 
     const value = {
         state,
         setState: setStatePartial,
-        useState
+        useState: useStateFn
     };
 
     const oldState = oldStateMap.get(context);
@@ -105,10 +113,10 @@ export const StateContextProvider: React.SFC<StateProviderProps> = props => {
     );
 };
 
-export function useContextState<TState>(contextObject: React.Context<Store<TState>>): {
+export function useContextState<TState>(contextObject: Context<Store<TState>>): {
     [P in keyof TState]: [TState[P], (newValue: Partial<TState[P]>) => void];
 } {
-    const context = React.useContext(contextObject);
+    const context = useContext(contextObject);
     const state: any = context.state;
     const setState = context.setState;
     const useObject: any = {};

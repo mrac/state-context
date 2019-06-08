@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "es5",
+        "moduleResolution": "node",
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitAny": false,
+        "noImplicitThis": true,
+        "noImplicitReturns": true,
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "declaration": true,
+        "declarationDir": "./package/dist",
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "lib": [
+            "es2015",
+            "es2016",
+            "es2017",
+            "es2018",
+            "esnext.array"
+        ],
+        "baseUrl": "./package/"
+    },
+    "exclude": [
+        "dist",
+        "node_modules"
+    ]
+}
