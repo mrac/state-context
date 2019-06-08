@@ -10,7 +10,7 @@ npm install state-context
 
 ## Idea
 
-1. In best case you just need to change 2 lines of code in your component to switch from local to global state:
+1. In best case you just need to change 3 lines of code in your component to switch from local to global state:
 
 Before:
 
@@ -21,6 +21,10 @@ Before:
 After:
 
 ```tsx
+  import { MyStateContext } from './my-state-context';
+
+  ...
+
   const context = React.useContext(MyStateContext);
   const [name, setName] = context.useState.name;
 ```
