@@ -12,21 +12,52 @@ npm install state-context
 
 1. In best case you just need to change 1 line of code in your component to switch from local to global state:
 
-Before:
-
+<table>
+<tr>
+<td>
+  Local state
+</td>
+<td>
+  Global state
+</td>
+</tr>
+<tr>
+<td valign="top">
+  
 ```tsx
-  const [name, setName] = React.useState();
+import * as React from 'react';
+
+const MyBirthday: React.SFC = () => {
+  const [age, setAge] = React.useState();
+
+  return (
+    <button onClick={() => setAge(age + 1)}>
+      Celebrate {age} birthday!
+    </button>
+  );
+};
 ```
-
-After:
-
+</td>
+<td valign="top">
+  
 ```tsx
-  import { MyStateContext } from './my-state-context';
+import * as React from 'react';
+import { MyStateContext } from './store';
 
-  ...
+const MyBirthday: React.SFC = () => {
+  const context = React.useContext(MyStateContext);
+  const [age, setAge] = context.useState.age; // <--
 
-  const [name, setName] = React.useContext(MyStateContext).useState.name;
+  return (
+    <button onClick={() => setAge(age + 1)}>
+      Celebrate {age} birthday!
+    </button>
+  );
+};
 ```
+</td>
+</tr>
+</table>
 
 2. It's useful for cases where Redux boilerplate would be an overhead (it has no actions, action-creators, reducers, mappings etc.)
 3. You can set up one global store or multiple shared stores.
