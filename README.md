@@ -32,7 +32,7 @@ import * as React from 'react';
 
 const MyBirthday: React.SFC = () => {
 
-  const [age, setAge] = React.useState(10);
+  const [age, setAge] = React.useState(20);
 
   return (
     <button onClick={() => setAge(age + 1)}>
@@ -41,6 +41,7 @@ const MyBirthday: React.SFC = () => {
   );
 };
 ```
+[Plunker](https://next.plnkr.co/edit/kyuJJXI5gKEtUEcS?open=src%2Fmy-birthday.js&preview)
 </td>
 <td valign="top">
   
@@ -59,6 +60,7 @@ const MyBirthday: React.SFC = () => {
   );
 };
 ```
+[Plunker](https://next.plnkr.co/edit/R5vFvHhwvjSbAK1d?open=src%2Fmy-birthday.js&preview)
 </td>
 </tr>
 </table>
