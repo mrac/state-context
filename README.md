@@ -29,8 +29,8 @@ import * as React from 'react';
 
 
 const MyBirthday: React.SFC = () => {
-  const [age, setAge] = React.useState();
 
+  const [age, setAge] = React.useState();
 
   return (
     <button onClick={() => setAge(age + 1)}>
