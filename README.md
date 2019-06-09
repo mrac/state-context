@@ -18,7 +18,7 @@ npm install state-context
   Local state
 </td>
 <td>
-  Global state
+  Global state with <code>state-context</code>
 </td>
 </tr>
 <tr>
@@ -27,8 +27,10 @@ npm install state-context
 ```tsx
 import * as React from 'react';
 
+
 const MyBirthday: React.SFC = () => {
   const [age, setAge] = React.useState();
+
 
   return (
     <button onClick={() => setAge(age + 1)}>
@@ -42,10 +44,10 @@ const MyBirthday: React.SFC = () => {
   
 ```tsx
 import * as React from 'react';
-import { MyStateContext } from './store';
+import { MyStore } from './my-store';
 
 const MyBirthday: React.SFC = () => {
-  const context = React.useContext(MyStateContext);
+  const context = React.useContext(MyStore);
   const [age, setAge] = context.useState.age; // <--
 
   return (
