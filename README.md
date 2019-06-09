@@ -63,8 +63,66 @@ const MyBirthday: React.SFC = () => {
 </tr>
 </table>
 
-2. It's useful for cases where Redux boilerplate would be an overhead (it has no actions, action-creators, reducers, mappings etc.)
+2. It's useful for cases where Redux boilerplate would be an overhead (it still makes sense and is easy to decouple state management from UI layer).
+
+<table>
+<tr>
+<td></td>
+<td>Redux</td>
+<td><code>state-context</code></td>
+</tr>
+<tr>
+<td>actions.ts</td>
+<td>YES</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>actions.test.ts</td>
+<td>YES</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>reducer.ts</td>
+<td>YES</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>reducer.test.ts</td>
+<td>YES</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>container.tsx</td>
+<td>YES</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>container.test.tsx</td>
+<td>YES</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>side-effects.ts</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>side-effects.test.ts</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>ui-layer-component.tsx</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>ui-layer-component.test.tsx</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+</table>
+
 3. You can set up one global store or multiple shared-state containers.
 4. It's still deterministic as you can attach middleware and watch/undo/redo.
-5. It still makes sense and is easy to decouple state management from UI layer.
-6. You have TypeScript support out of the box.
+5. You have TypeScript support out of the box.
