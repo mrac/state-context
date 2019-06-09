@@ -56,18 +56,21 @@ export const StateContextProvider: SFC<StateProviderProps> = props => {
     };
 
     const setStatePartial = (stateChange: Partial<{}>) => {
-        const newState = { ...state, ...stateChange };
+        const oldAggregatedStateChange = stateChangeMap.get(context) || {};
+        const aggregatedStateChange = { ...oldAggregatedStateChange, ...stateChange };
+        const newState = { ...state, ...aggregatedStateChange };
 
         const log = {
             stateChange,
-            oldState: state,
+            oldState: { ...state, ...oldAggregatedStateChange },
             newState,
             stack: stack(new Error().stack),
             caller: caller((new Error()).stack)
         };
 
+        stateChangeMap.set(context, aggregatedStateChange);
+
         runMiddlewares('beforeSetState', log);
-        stateChangeMap.set(context, { ...stateChangeMap.get(context) || {}, ...stateChange });
         setState(newState);
         runMiddlewares('afterSetState', log);
     };
@@ -93,7 +96,6 @@ export const StateContextProvider: SFC<StateProviderProps> = props => {
     };
 
     const oldState = oldStateMap.get(context);
-
     const stateChange = stateChangeMap.get(context);
 
     const log = {
